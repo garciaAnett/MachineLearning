@@ -3,32 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Cell : MonoBehaviour
 {
-    // Índice de experiencia en la lista de experiencias actuales
-    public int indiceExperiencia;
-
-    // Referencia al CellController
     [HideInInspector]
     public CellController cellController;
 
+    public CellController.Celula experiencia;
+
     void Start()
     {
-        // Destruir la célula después de 10 segundos
+        // Destruir la célula después de 10 segundos (opcional)
         Destroy(gameObject, 10f);
     }
 
     void OnMouseDown()
     {
-        // Actualizar experiencia como eliminada en el controlador
         if (cellController != null)
         {
-            cellController.CellCaptured(indiceExperiencia);
+            cellController.CellCaptured(this);
         }
 
-        // Destruir la célula
         Destroy(gameObject);
     }
-   
 }
+
+
+
+

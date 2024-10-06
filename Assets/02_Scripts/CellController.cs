@@ -1,7 +1,6 @@
 using UnityEngine;
-using System.Collections.Generic;
 using UnityEngine.UI;
-
+using System.Collections.Generic;
 
 public class CellController : MonoBehaviour
 {
@@ -11,17 +10,19 @@ public class CellController : MonoBehaviour
     // Número de células a generar por generación
     public int numeroDeCelulas = 10;
 
-    // Intervalo de tiempo entre generaciones
+    // Intervalo de tiempo entre generaciones (duración de cada ronda)
     public float intervaloTiempo = 10f;
 
-    // Imagen de la barra de vida
-    public Image lifeB;
+    // Variables para la interfaz de usuario
+    public Text timeCounterText;    // Texto para mostrar los segundos restantes
+    public Text scoreText;          // Texto para mostrar la cantidad de células destruidas
+    public Text roundText;          // Texto para mostrar la ronda actual
 
-    // Total de células capturadas
-    public int totalCells = 0;
-
-    // Lista de GameObjects de células existentes
+    // Variables privadas
     private List<GameObject> celulasExistentes = new List<GameObject>();
+    private int currentRound = 0;
+    private float timeLeftInRound;
+    private int totalCellsDestroyed = 0;
 
     // Clase para representar las propiedades de una célula
     [System.Serializable]
@@ -34,44 +35,49 @@ public class CellController : MonoBehaviour
 
     // Listas para manejar las experiencias de las células
     private List<Celula> experienciasPrevias = new List<Celula>();
-    public List<Celula> experienciasActuales = new List<Celula>();
     private List<Celula> experienciasSupervivientes = new List<Celula>();
-
-    // Tiempo transcurrido desde el inicio del juego
-    private float tiempoTranscurrido = 0f;
 
     void Start()
     {
+        // Inicializar el tiempo restante de la ronda
+        timeLeftInRound = intervaloTiempo;
+
         // Iniciar la generación de células en intervalos definidos
         InvokeRepeating(nameof(GenerarCelulas), 0f, intervaloTiempo);
     }
 
     void Update()
     {
-        // Actualizar el tiempo transcurrido
-        tiempoTranscurrido += Time.deltaTime;
+        // Actualizar el tiempo restante de la ronda
+        timeLeftInRound -= Time.deltaTime;
+        timeLeftInRound = Mathf.Max(0f, timeLeftInRound);
 
-        // Asegurarse de que haya pasado algún tiempo
-        if (tiempoTranscurrido > 0f)
+        // Actualizar la interfaz de usuario
+        if (timeCounterText != null)
         {
-            // Calcular el promedio de células capturadas por segundo
-            float promedioCelulasPorSegundo = totalCells / tiempoTranscurrido;
+            timeCounterText.text = "Tiempo: " + Mathf.CeilToInt(timeLeftInRound).ToString() + " s";
+        }
 
-            // Actualizar el fillAmount de la barra con el promedio normalizado
-            lifeB.fillAmount = Mathf.Clamp(promedioCelulasPorSegundo / 10f, 0f, 1f);
+        if (scoreText != null)
+        {
+            scoreText.text = "Células destruidas: " + totalCellsDestroyed.ToString();
+        }
+
+        if (roundText != null)
+        {
+            roundText.text = "Ronda: " + currentRound.ToString();
         }
     }
 
     void GenerarCelulas()
     {
-        // Eliminar células existentes
-        foreach (GameObject celula in celulasExistentes)
-        {
-            Destroy(celula);
-        }
-        celulasExistentes.Clear();
+        // Incrementar el número de ronda
+        currentRound++;
 
-        // Filtrar experiencias para obtener solo las células que sobrevivieron
+        // Reiniciar el tiempo restante de la ronda
+        timeLeftInRound = intervaloTiempo;
+
+        // Filtrar las experiencias de las células que sobrevivieron en la ronda anterior
         experienciasSupervivientes.Clear();
         foreach (Celula experiencia in experienciasPrevias)
         {
@@ -81,102 +87,130 @@ public class CellController : MonoBehaviour
             }
         }
 
-        // Determinar si se usarán células supervivientes como "padres"
-        bool usarSupervivientes = experienciasSupervivientes.Count > 0;
+        // Destruir las células existentes de la ronda anterior
+        foreach (GameObject celula in celulasExistentes)
+        {
+            if (celula != null)
+            {
+                Destroy(celula);
+            }
+        }
+        celulasExistentes.Clear();
+
+        // Limpiar experiencias previas para olvidar herencias anteriores
+        experienciasPrevias.Clear();
 
         // Generar nuevas células
         for (int i = 0; i < numeroDeCelulas; i++)
         {
-            // Instanciar la célula
+            // Instanciar y posicionar la célula
             GameObject nuevaCelula = Instantiate(celulaPrefab);
-
-            // Asignar posición aleatoria
-            float x = Random.Range(-20f, 10f);
-            float y = Random.Range(1f, 4f);
-            nuevaCelula.transform.position = new Vector2(x, y);
+            PosicionarCelulaDentroDeCamara(nuevaCelula);
 
             // Determinar atributos de color y tamaño
             Color colorAjustado;
             float tamañoAjustado;
 
-            if (usarSupervivientes)
+            if (experienciasSupervivientes.Count > 0)
             {
-                // Seleccionar aleatoriamente una célula superviviente como "padre"
+                // Heredar atributos de una célula superviviente
                 Celula padre = experienciasSupervivientes[Random.Range(0, experienciasSupervivientes.Count)];
 
-                // Convertir color del padre a HSV
-                Color.RGBToHSV(padre.color, out float padreHue, out float padreSat, out float padreVal);
-
-                // Aplicar mutación al tono (hue)
-                float mutacionHue = Random.Range(-0.02f, 0.02f); // Puedes ajustar este valor
-                float nuevoHue = (padreHue + mutacionHue + 1f) % 1f; // Asegurar que está en el rango [0,1]
-
-                // Limitar el hue dentro del rango deseado (opcional)
-                float minHue = 0.25f; // Límite inferior
-                float maxHue = 0.6f;  // Límite superior
-                nuevoHue = Mathf.Clamp(nuevoHue, minHue, maxHue);
-
-                // Reconstruir el color ajustado
-                colorAjustado = Color.HSVToRGB(nuevoHue, padreSat, padreVal);
-
-                // Aplicar mutación al tamaño
-                float mutacionTamaño = Random.Range(-0.02f, 0.02f); // Puedes ajustar este valor
-                tamañoAjustado = Mathf.Clamp(padre.tamaño + mutacionTamaño, 0.5f, 1.5f); // Rango definido para el tamaño
+                colorAjustado = MutarColor(padre.color);
+                tamañoAjustado = MutarTamaño(padre.tamaño);
             }
             else
             {
-                // Si no hay supervivientes previos, usar valores aleatorios
-                float hueAleatorio = Random.Range(0f, 1f); // Tono del círculo
-                float satAleatorio = Random.Range(0.5f, 1f);    // Saturación del color
-                float valAleatorio = Random.Range(0.5f, 1f); // Luminosidad
-                colorAjustado = Color.HSVToRGB(hueAleatorio, satAleatorio, valAleatorio);
+                // Generar atributos aleatorios si no hay supervivientes
+                colorAjustado = GenerarColorAleatorio();
                 tamañoAjustado = Random.Range(0.3f, 1f);
             }
 
-            // Asignar tamaño y color
-            nuevaCelula.transform.localScale = new Vector3(tamañoAjustado, tamañoAjustado, 1f); // Definir el tamaño del círculo
-            SpriteRenderer spriteRenderer = nuevaCelula.GetComponent<SpriteRenderer>();
-            if (spriteRenderer != null)
-            {
-                spriteRenderer.color = colorAjustado;
-            }
+            // Asignar atributos a la célula
+            AsignarAtributosACelula(nuevaCelula, colorAjustado, tamañoAjustado);
 
-            // Añadir a la lista de células existentes
-            celulasExistentes.Add(nuevaCelula);
-
-            // Registrar la experiencia inicial
+            // Crear y asociar la experiencia con la célula
             Celula nuevaExperiencia = new Celula
             {
                 color = colorAjustado,
                 tamaño = tamañoAjustado,
-                sobrevivio = true // Asumimos que sobrevivirá por ahora
+                sobrevivio = true
             };
-            experienciasActuales.Add(nuevaExperiencia);
+            experienciasPrevias.Add(nuevaExperiencia);
 
-            // Asignar el índice de experiencia a la célula y referencia al controlador
             Cell scriptCelula = nuevaCelula.GetComponent<Cell>();
             if (scriptCelula != null)
             {
-                scriptCelula.indiceExperiencia = experienciasActuales.Count - 1;
-                scriptCelula.cellController = this; // Asignar referencia al CellController
+                scriptCelula.cellController = this;
+                scriptCelula.experiencia = nuevaExperiencia;
             }
+
+            // Añadir a la lista de células existentes
+            celulasExistentes.Add(nuevaCelula);
         }
 
-        // Preparar las experiencias para la siguiente generación
-        experienciasPrevias.Clear();
-        experienciasPrevias.AddRange(experienciasActuales);
-        experienciasActuales.Clear(); // Vaciar la lista actual
+        // Limpiar la lista de supervivientes para la próxima ronda
+        experienciasSupervivientes.Clear();
     }
 
-    // Método para actualizar cuando una célula es capturada
-    public void CellCaptured(int indiceExperiencia)
+    void PosicionarCelulaDentroDeCamara(GameObject celula)
     {
-        if (indiceExperiencia >= 0 && indiceExperiencia < experienciasActuales.Count)
+        Camera camara = Camera.main;
+        if (camara == null)
         {
-            experienciasActuales[indiceExperiencia].sobrevivio = false;
+            Debug.LogError("No se encontró la cámara principal.");
+            return;
         }
-        totalCells += 1;
-        Debug.Log("CANTIDAD DE CÉLULAS CAPTURADAS: " + totalCells);
+
+        Vector2 minLimites = camara.ViewportToWorldPoint(new Vector2(0, 0));
+        Vector2 maxLimites = camara.ViewportToWorldPoint(new Vector2(1, 1));
+
+        float x = Random.Range(minLimites.x, maxLimites.x);
+        float y = Random.Range(minLimites.y, maxLimites.y);
+        celula.transform.position = new Vector2(x, y);
+    }
+
+    void AsignarAtributosACelula(GameObject celula, Color color, float tamaño)
+    {
+        celula.transform.localScale = new Vector3(tamaño, tamaño, 1f);
+        SpriteRenderer spriteRenderer = celula.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = color;
+        }
+    }
+
+    float MutarTamaño(float tamañoPadre)
+    {
+        float mutacionTamaño = Random.Range(-0.1f, 0.1f); // Variación entre -10% y +10%
+        return Mathf.Clamp(tamañoPadre + mutacionTamaño, 0.3f, 1.5f);
+    }
+
+    Color MutarColor(Color colorPadre)
+    {
+        Color.RGBToHSV(colorPadre, out float hue, out float sat, out float val);
+        float nuevaVal = Mathf.Clamp(val + Random.Range(-0.1f, 0.1f), 0f, 1f); // Variación en brillo
+        return Color.HSVToRGB(hue, sat, nuevaVal);
+    }
+
+    Color GenerarColorAleatorio()
+    {
+        return Color.HSVToRGB(Random.Range(0f, 1f), Random.Range(0.5f, 1f), Random.Range(0.5f, 1f));
+    }
+
+    // Método para capturar una célula
+    public void CellCaptured(Cell celula)
+    {
+        // Marcar la experiencia de la célula como no sobreviviente
+        if (celula.experiencia != null)
+        {
+            celula.experiencia.sobrevivio = false;
+        }
+
+        // Eliminar la célula de la lista de células existentes
+        celulasExistentes.Remove(celula.gameObject);
+
+        // Incrementar el contador de células destruidas
+        totalCellsDestroyed += 1;
     }
 }
-
