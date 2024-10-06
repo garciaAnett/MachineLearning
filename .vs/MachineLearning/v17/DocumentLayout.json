@@ -1,21 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\pixel art\\MachineLearning 1\\MachineLearning\\",
+  "WorkspaceRootPath": "C:\\Users\\59172\\OneDrive\\Pictures\\Saved Pictures\\Archv1\\GAME\\AUTOAPRENDIZAJE\\MachineLearning\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FDB0B02B-2E3A-40E9-BE7F-A34B1BC9B327}|Assembly-CSharp.csproj|d:\\pixel art\\machinelearning 1\\machinelearning\\assets\\02_scripts\\cellcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FDB0B02B-2E3A-40E9-BE7F-A34B1BC9B327}|Assembly-CSharp.csproj|c:\\users\\59172\\onedrive\\pictures\\saved pictures\\archv1\\game\\autoaprendizaje\\machinelearning\\assets\\02_scripts\\cellcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FDB0B02B-2E3A-40E9-BE7F-A34B1BC9B327}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\cellcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FDB0B02B-2E3A-40E9-BE7F-A34B1BC9B327}|Assembly-CSharp.csproj|D:\\pixel art\\MachineLearning 1\\MachineLearning\\assets\\02_scripts\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FDB0B02B-2E3A-40E9-BE7F-A34B1BC9B327}|Assembly-CSharp.csproj|C:\\Users\\59172\\OneDrive\\Pictures\\Saved Pictures\\Archv1\\GAME\\AUTOAPRENDIZAJE\\MachineLearning\\assets\\02_scripts\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FDB0B02B-2E3A-40E9-BE7F-A34B1BC9B327}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FDB0B02B-2E3A-40E9-BE7F-A34B1BC9B327}|Assembly-CSharp.csproj|D:\\pixel art\\MachineLearning 1\\MachineLearning\\assets\\02_scripts\\customcursor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FDB0B02B-2E3A-40E9-BE7F-A34B1BC9B327}|Assembly-CSharp.csproj|C:\\Users\\59172\\OneDrive\\Pictures\\Saved Pictures\\Archv1\\GAME\\AUTOAPRENDIZAJE\\MachineLearning\\assets\\02_scripts\\customcursor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FDB0B02B-2E3A-40E9-BE7F-A34B1BC9B327}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\customcursor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FDB0B02B-2E3A-40E9-BE7F-A34B1BC9B327}|Assembly-CSharp.csproj|D:\\pixel art\\MachineLearning 1\\MachineLearning\\assets\\02_scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{FDB0B02B-2E3A-40E9-BE7F-A34B1BC9B327}|Assembly-CSharp.csproj|C:\\Users\\59172\\OneDrive\\Pictures\\Saved Pictures\\Archv1\\GAME\\AUTOAPRENDIZAJE\\MachineLearning\\assets\\02_scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{FDB0B02B-2E3A-40E9-BE7F-A34B1BC9B327}|Assembly-CSharp.csproj|solutionrelative:assets\\02_scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -26,31 +26,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Player.cs",
-              "DocumentMoniker": "D:\\pixel art\\MachineLearning 1\\MachineLearning\\Assets\\02_Scripts\\Player.cs",
+              "DocumentMoniker": "C:\\Users\\59172\\OneDrive\\Pictures\\Saved Pictures\\Archv1\\GAME\\AUTOAPRENDIZAJE\\MachineLearning\\Assets\\02_Scripts\\Player.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\Player.cs",
-              "ToolTip": "D:\\pixel art\\MachineLearning 1\\MachineLearning\\Assets\\02_Scripts\\Player.cs",
+              "ToolTip": "C:\\Users\\59172\\OneDrive\\Pictures\\Saved Pictures\\Archv1\\GAME\\AUTOAPRENDIZAJE\\MachineLearning\\Assets\\02_Scripts\\Player.cs",
               "RelativeToolTip": "Assets\\02_Scripts\\Player.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -60,37 +52,35 @@
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "CustomCursor.cs",
-              "DocumentMoniker": "D:\\pixel art\\MachineLearning 1\\MachineLearning\\Assets\\02_Scripts\\CustomCursor.cs",
+              "DocumentMoniker": "C:\\Users\\59172\\OneDrive\\Pictures\\Saved Pictures\\Archv1\\GAME\\AUTOAPRENDIZAJE\\MachineLearning\\Assets\\02_Scripts\\CustomCursor.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\CustomCursor.cs",
-              "ToolTip": "D:\\pixel art\\MachineLearning 1\\MachineLearning\\Assets\\02_Scripts\\CustomCursor.cs",
+              "ToolTip": "C:\\Users\\59172\\OneDrive\\Pictures\\Saved Pictures\\Archv1\\GAME\\AUTOAPRENDIZAJE\\MachineLearning\\Assets\\02_Scripts\\CustomCursor.cs",
               "RelativeToolTip": "Assets\\02_Scripts\\CustomCursor.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T06:33:48.65Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-05T06:33:48.65Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Cell.cs",
-              "DocumentMoniker": "D:\\pixel art\\MachineLearning 1\\MachineLearning\\Assets\\02_Scripts\\Cell.cs",
+              "DocumentMoniker": "C:\\Users\\59172\\OneDrive\\Pictures\\Saved Pictures\\Archv1\\GAME\\AUTOAPRENDIZAJE\\MachineLearning\\Assets\\02_Scripts\\Cell.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\Cell.cs",
-              "ToolTip": "D:\\pixel art\\MachineLearning 1\\MachineLearning\\Assets\\02_Scripts\\Cell.cs",
+              "ToolTip": "C:\\Users\\59172\\OneDrive\\Pictures\\Saved Pictures\\Archv1\\GAME\\AUTOAPRENDIZAJE\\MachineLearning\\Assets\\02_Scripts\\Cell.cs",
               "RelativeToolTip": "Assets\\02_Scripts\\Cell.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAqwBwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-05T06:33:47.385Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-05T06:33:47.385Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "CellController.cs",
-              "DocumentMoniker": "D:\\pixel art\\MachineLearning 1\\MachineLearning\\Assets\\02_Scripts\\CellController.cs",
+              "DocumentMoniker": "C:\\Users\\59172\\OneDrive\\Pictures\\Saved Pictures\\Archv1\\GAME\\AUTOAPRENDIZAJE\\MachineLearning\\Assets\\02_Scripts\\CellController.cs",
               "RelativeDocumentMoniker": "Assets\\02_Scripts\\CellController.cs",
-              "ToolTip": "D:\\pixel art\\MachineLearning 1\\MachineLearning\\Assets\\02_Scripts\\CellController.cs",
+              "ToolTip": "C:\\Users\\59172\\OneDrive\\Pictures\\Saved Pictures\\Archv1\\GAME\\AUTOAPRENDIZAJE\\MachineLearning\\Assets\\02_Scripts\\CellController.cs",
               "RelativeToolTip": "Assets\\02_Scripts\\CellController.cs",
-              "ViewState": "AgIAAJwAAAAAAAAAAAAYwNgAAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAAGEAAAAAAAAAAAAqwJ0AAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-04T03:38:21.265Z",
               "EditorCaption": ""
@@ -107,11 +97,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             }
           ]
         }

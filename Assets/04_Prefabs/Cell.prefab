@@ -45,6 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad665ecd3e719747a26fda284b70180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cellController: {fileID: 0}
+  experiencia:
+    color: {r: 0, g: 0, b: 0, a: 0}
+    "tama\xF1o": 0
+    sobrevivio: 0
 --- !u!212 &4771176891135554578
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -85,8 +90,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 20eea1d78dd14194cb0041d58ee7ee4e, type: 3}
+  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
