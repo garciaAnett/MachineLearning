@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 23
-  productGUID: d4159ebc3ef46224dbb10b22aac5bb16
+  productGUID: 956b311ccffbf0f4c875f3446ef7334a
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -654,10 +654,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 47253f31-9dd9-4213-95eb-5a02bca060bd
+  cloudProjectId: 6f09f7b0-34de-473c-aa47-665bc8b419a8
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: MachineLearning 2024-09-26_17-15-43
+  projectName: MachineLearning 2024-10-03_22-06-36
   organizationId: mordoguzguzman
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
