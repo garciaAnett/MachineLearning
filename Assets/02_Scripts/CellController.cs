@@ -36,6 +36,7 @@ public class CellController : MonoBehaviour
     // Listas para manejar las experiencias de las células
     private List<Celula> experienciasPrevias = new List<Celula>();  // Lista de células de la ronda anterior
     private List<Celula> experienciasSupervivientes = new List<Celula>(); // Células que sobrevivieron a la ronda
+    private List<Celula> experienciasSupervivientesPermanentes = new List<Celula>(); // Lista permanente de supervivientes
 
     // Inicializa las variables y comienza la generación de células
     void Start()
@@ -44,7 +45,7 @@ public class CellController : MonoBehaviour
         timeLeftInRound = intervaloTiempo;
 
         // Iniciar la generación de células cada intervalo de tiempo
-        InvokeRepeating(nameof(GenerarCelulas), 0f, intervaloTiempo);
+       InvokeRepeating(nameof(GenerarCelulas), 0f, intervaloTiempo);
     }
 
     // Actualiza la interfaz de usuario y el tiempo en cada frame
@@ -71,11 +72,42 @@ public class CellController : MonoBehaviour
         {
             roundText.text = "Ronda: " + currentRound.ToString();
         }
+
+        // Verificar si el tiempo de la ronda ha terminado
+        if (timeLeftInRound <= 0f)
+        {
+            // Generar nuevas células al finalizar el tiempo
+            GenerarCelulas();
+        }
+    }
+
+    // Método para marcar las células restantes como sobrevivientes y almacenarlas permanentemente
+    void FinalizarRonda()
+    {
+        foreach (GameObject celula in celulasExistentes)
+        {
+            if (celula != null)
+            {
+                Cell scriptCelula = celula.GetComponent<Cell>();
+                if (scriptCelula != null && scriptCelula.experiencia != null)
+                {
+                    scriptCelula.experiencia.sobrevivio = true;
+                    // Añadir a la lista permanente si aún no está presente
+                    if (!experienciasSupervivientesPermanentes.Contains(scriptCelula.experiencia))
+                    {
+                        experienciasSupervivientesPermanentes.Add(scriptCelula.experiencia);
+                    }
+                }
+            }
+        }
     }
 
     // Genera nuevas células en cada ronda
     void GenerarCelulas()
     {
+        // Finalizar la ronda anterior marcando las células restantes como sobrevivientes
+        FinalizarRonda();
+
         // Incrementar el número de ronda
         currentRound++;
 
@@ -91,6 +123,9 @@ public class CellController : MonoBehaviour
                 experienciasSupervivientes.Add(experiencia);
             }
         }
+
+        // Combinar experienciasSupervivientes con experienciasSupervivientesPermanentes
+        List<Celula> todasLasExperienciasSupervivientes = new List<Celula>(experienciasSupervivientesPermanentes);
 
         // Destruir las células existentes de la ronda anterior
         foreach (GameObject celula in celulasExistentes)
@@ -116,10 +151,10 @@ public class CellController : MonoBehaviour
             Color colorAjustado;
             float tamañoAjustado;
 
-            if (experienciasSupervivientes.Count > 0)
+            if (todasLasExperienciasSupervivientes.Count > 0)
             {
-                // Heredar atributos de una célula superviviente
-                Celula padre = experienciasSupervivientes[Random.Range(0, experienciasSupervivientes.Count)];
+                // Heredar atributos de una célula superviviente de la lista permanente
+                Celula padre = todasLasExperienciasSupervivientes[Random.Range(0, todasLasExperienciasSupervivientes.Count)];
                 colorAjustado = MutarColor(padre.color);  // Mutar ligeramente el color del padre
                 tamañoAjustado = MutarTamaño(padre.tamaño);  // Mutar ligeramente el tamaño del padre
             }
@@ -203,9 +238,9 @@ public class CellController : MonoBehaviour
         Color.RGBToHSV(colorPadre, out float hue, out float sat, out float val);
 
         // Mutar ligeramente el tono, la saturación y el brillo
-        float nuevoHue = Mathf.Clamp(hue + Random.Range(-0.05f, 0.05f), 0f, 1f);  // Variación pequeña en el tono
-        float nuevaSat = Mathf.Clamp(sat + Random.Range(-0.05f, 0.05f), 0f, 1f);  // Variación pequeña en la saturación
-        float nuevaVal = Mathf.Clamp(val + Random.Range(-0.05f, 0.05f), 0f, 1f);  // Variación pequeña en el brillo
+        float nuevoHue = Mathf.Clamp01(hue + Random.Range(-0.05f, 0.05f));  // Variación pequeña en el tono
+        float nuevaSat = Mathf.Clamp01(sat + Random.Range(-0.05f, 0.05f));  // Variación pequeña en la saturación
+        float nuevaVal = Mathf.Clamp01(val + Random.Range(-0.05f, 0.05f));  // Variación pequeña en el brillo
 
         // Devolver el nuevo color en formato RGB
         return Color.HSVToRGB(nuevoHue, nuevaSat, nuevaVal);
